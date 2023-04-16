@@ -1,9 +1,71 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
 
 function App() {
+  const [data, setData] = useState({})
+  const [latitude, setLatitude] = useState('')
+  const [longitude, setLongitude] = useState('')
+
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=d0e87a14ebdbdbdc6f8338283b5d4282`
+
+  const searchLocation = (event) => {
+    if(event.key === 'Enter') {
+      axios.get(url).then((response) =>{
+        setData(response.data)
+        console.log(response.data)
+      })
+    }
+    // setLatitude('')
+    // setLongitude('')
+  }
+
   return (
-    <div className="App">
-      <h1>Hello, World!</h1>
+    <div className='app'>
+      <div className='search'>
+        <input
+        value={latitude}
+        onChange={event => setLatitude(event.target.value)}
+        onKeyPress={searchLocation}
+        placeholder='Enter latitide'
+        type='text'/>
+
+<input
+        value={longitude}
+        onChange={event => setLongitude(event.target.value)}
+        onKeyPress={searchLocation}
+        placeholder='Enter longitude'
+        type='text'/>
+      </div>
+      
+      <div className='container'>
+        <div className='top'>
+          <div className='location'>
+            {data.name ? <p>{data.name}</p> : null}
+          </div>
+          <div className='temp'>
+            {data.main ? <h1>{data.main.temp} C</h1> : null}
+          </div>
+          <div className='description'>
+            {data.weather ? <p>{data.weather[0].main}</p> : null }
+          </div>
+        </div>
+        <div className='bottom'>
+          <div className='feels'>
+            {data.main ? <p className='bold'>{data.main.feels_like} C</p> : null}
+            
+            <p>Feels Like</p>
+          </div>
+          <div className='humidity'>
+            {data.main ? <p className='bold'>{data.main.humidity}%</p> : null}
+            
+            <p>Humidity</p>
+          </div>
+          <div className='wind'>
+            {data.main ? <p className='bold'>{data.wind.speed} KPH</p> : null}
+            <p>Winds</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
