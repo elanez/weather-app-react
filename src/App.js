@@ -3,10 +3,9 @@ import axios from 'axios';
 
 function App() {
   const [data, setData] = useState({})
-  const [latitude, setLatitude] = useState('')
-  const [longitude, setLongitude] = useState('')
+  const [location, setLocation] = useState('')
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=d0e87a14ebdbdbdc6f8338283b5d4282`
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=d0e87a14ebdbdbdc6f8338283b5d4282`
 
   const searchLocation = (event) => {
     if(event.key === 'Enter') {
@@ -14,26 +13,19 @@ function App() {
         setData(response.data)
         console.log(response.data)
       })
+      
+      setLocation('')
     }
-    // setLatitude('')
-    // setLongitude('')
   }
 
   return (
     <div className='app'>
       <div className='search'>
         <input
-        value={latitude}
-        onChange={event => setLatitude(event.target.value)}
+        value={location}
+        onChange={event => setLocation(event.target.value)}
         onKeyPress={searchLocation}
-        placeholder='Enter latitide'
-        type='text'/>
-
-<input
-        value={longitude}
-        onChange={event => setLongitude(event.target.value)}
-        onKeyPress={searchLocation}
-        placeholder='Enter longitude'
+        placeholder='Enter Location'
         type='text'/>
       </div>
       
