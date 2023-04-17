@@ -32,19 +32,20 @@ function App() {
       <div className='container'>
         <div className='top'>
           <div className='location'>
-            {data.name ? <p>{data.name}</p> : null}
+            {data.name ? <p>{data.name}, {data.sys.country}</p> : null}
           </div>
           <div className='temp'>
             {data.main ? <h1>{data.main.temp} C</h1> : null}
           </div>
           <div className='description'>
-            {data.weather ? <p>{data.weather[0].main}</p> : null }
+          {data.weather ? <p>{data.weather[0].main}</p> : null }
+            {data.weather ? <p>{data.weather[0].description}</p> : null }
           </div>
         </div>
-        <div className='bottom'>
+        {data.main !== undefined && 
+          <div className='bottom'>
           <div className='feels'>
             {data.main ? <p className='bold'>{data.main.feels_like} C</p> : null}
-            
             <p>Feels Like</p>
           </div>
           <div className='humidity'>
@@ -57,6 +58,8 @@ function App() {
             <p>Winds</p>
           </div>
         </div>
+        }
+        
       </div>
     </div>
   );

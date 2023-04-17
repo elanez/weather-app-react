@@ -30,7 +30,7 @@ h1 {
 
 .app::before{
   content: ' ';
-  background: url('./assets/sweet-afternoon-wallpaper-preview.jpg') no-repeat;
+  background: url('./assets/weathering-with-you-bg.png') no-repeat;
   background-position: center center;
   background-size: cover;
   position: absolute;
@@ -77,10 +77,7 @@ h1 {
 }
 
 .app .description{
-  position: relative;
-  right: -90%;
-  transform-origin: 0 0;
-  transform: rotate(269deg);
+  text-align: right;
 }
 
 .app .bottom{
