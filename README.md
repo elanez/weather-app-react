@@ -1,1 +1,1 @@
-# A ReactJS Weather App using Weather using OpenWeatherAPI
+# A ReactJS Weather App using OpenWeatherAPI
